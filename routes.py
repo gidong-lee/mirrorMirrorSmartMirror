@@ -9,6 +9,7 @@ from gtts_token import gtts_token
 app = Flask(__name__)
 domain = 'http://127.0.0.1:5000'
 
+
 # "/"으로 접속시 templates 디렉토리의 index.html을 노출
 @app.route("/")
 def hello():
@@ -22,15 +23,15 @@ def getDaumMedia():
     r = requests.get(url)
     return json.dumps(r.json()["simpleNews"][0])
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
 # 구글 TTS 를 사용하기 위한 token 생성
 def generateGttsToken(text):
     token = gtts_token.Token().calculate_token(text)
     return token
 
-# 구글 TTS 를 통한 음성 출력 
+# 구글 TTS 를 통한 음성 출력
+
+
 @app.route("/gtts")
 def gtts():
     text = request.args.get('text')
@@ -38,4 +39,8 @@ def gtts():
     token = generateGttsToken(text)
     r = requests.get(url + token)
 
-    return render_template("gtts.html", url=url+token)
+    return render_template("gtts.html", url=url + token)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
