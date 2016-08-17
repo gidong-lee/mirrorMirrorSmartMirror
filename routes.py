@@ -2,7 +2,9 @@
 
 import logging
 import requests
+import urllib
 import json
+import time
 from flask import Flask, redirect, url_for, render_template, request, Response
 from gtts_token import gtts_token
 
@@ -29,17 +31,23 @@ def generateGttsToken(text):
     token = gtts_token.Token().calculate_token(text)
     return token
 
+
 # 구글 TTS 를 통한 음성 출력
-
-
-@app.route("/gtts")
+@app.route("/gtts.json")
 def gtts():
     text = request.args.get('text')
-    url = 'https://translate.google.com/translate_tts?q=' + text + '&tl=ko&client=t&tk='
+    #url = 'https://translate.google.com/translate_tts?q=' + text + '&tl=ko&client=t&tk='
+    url = 'https://translate.google.com/translate_tts'
     token = generateGttsToken(text)
-    r = requests.get(url + token)
+    paramMap = {"q": text, "tl": "ko", "client": "t", "tk": token}
 
-    return render_template("gtts.html", url=url + token)
+    param = urllib.parse.urlencode(paramMap)
+    print(url + '?' + param)
+    r = requests.get(url + '?' + param)
+    time.sleep(1)
+    resultObj = {"url": url + '?' + param}
+    return json.dumps(resultObj)
+    # return render_template("gtts.html", url=url + token)
 
 
 if __name__ == "__main__":
