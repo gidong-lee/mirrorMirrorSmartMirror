@@ -7,6 +7,7 @@ import json
 import time
 from flask import Flask, redirect, url_for, render_template, request, Response
 from gtts_token import gtts_token
+import led
 
 app = Flask(__name__)
 domain = 'http://127.0.0.1:5000'
@@ -49,6 +50,18 @@ def gtts():
     return json.dumps(resultObj)
     # return render_template("gtts.html", url=url + token)
 
+
+#  GPIO LED ON
+@app.route("/ledon")
+def ledon():
+    led.ledon()
+    return
+
+# GPIO LED OFF
+@app.route("/ledoff")
+def ledoff():
+    led.ledoff()
+    return
 
 if __name__ == "__main__":
     app.run(debug=True)
