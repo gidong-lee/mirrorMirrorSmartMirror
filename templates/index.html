@@ -8,7 +8,7 @@
 <body>
     <div><img src="/static/img/princess.jpg"></div>
     <div id="talk" name="talk"></div>
-    <iframe id="gtts" name="gtts" style="display: none; width:1px; height: 1px;"></iframe>
+    <iframe id="gtts" name="gtts" style="display: none; width:1px; height: 1px;" onerror="console.log('error iframe')"></iframe>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.4.0/annyang.min.js"></script>
@@ -34,6 +34,26 @@ function call_tts(text) {
     $("#talk").text(text);
 }
 
+function ledControl(status){
+    var url;
+    if(status == true)
+    {
+        url = "/ledon.json"
+    }else{
+        url = "/ledoff.json"
+    }
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        data: {},
+        success: function(data) {
+            if(data.txt){
+                call_tts(data.txt);
+            }
+        }
+    });
+}
 
 
 window.onload = function() {
@@ -44,14 +64,27 @@ window.onload = function() {
             }
         };
         var commands = {
-            '일어나 :userName야': function(userName) {
+            'smart mirror wake up :userName': function(userName) {
                 call_tts(userName + ' 일어났습니다.');
             }
+            ,'smart mirror turn on': function() {
+                //call_tts("야 불 켜");
+                ledControl(true);
+            }
+            ,'smart mirror turn off': function() {
+                //call_tts("야 불 꺼");
+                ledControl(false);
+            }
         };
-        annyang.setLanguage("ko");
-        annyang.addCommands(commandsDefault);
+        annyang.setLanguage("en-US");
+        //annyang.setLanguage("ko");
+        //annyang.addCommands(commandsDefault);
         annyang.addCommands(commands);
         annyang.debug(true);
+        annyang.addCallback('resultNoMatch', function(userSaid) {
+              $("#talk").text(userSaid);
+              console.log("userSaid : " + userSaid); // sample output: 'hello'
+        });
         annyang.start();
     }
 }

@@ -7,10 +7,11 @@ import json
 import time
 from flask import Flask, redirect, url_for, render_template, request, Response
 from gtts_token import gtts_token
-import led
+#import led
 
 app = Flask(__name__)
-domain = 'http://127.0.0.1:5000'
+#domain = 'http://127.0.1.1:5000'
+#domain = 'http://10.202.209.157:8000'
 
 
 # "/"으로 접속시 templates 디렉토리의 index.html을 노출
@@ -45,23 +46,22 @@ def gtts():
     param = urllib.parse.urlencode(paramMap)
     print(url + '?' + param)
     r = requests.get(url + '?' + param)
-    time.sleep(1)
     resultObj = {"url": url + '?' + param}
     return json.dumps(resultObj)
     # return render_template("gtts.html", url=url + token)
 
 
 #  GPIO LED ON
-@app.route("/ledon")
+@app.route("/ledon.json")
 def ledon():
-    led.ledon()
-    return
+#    led.ledon()
+    return json.dumps({"txt": "불을 켰습니다."})
 
 # GPIO LED OFF
-@app.route("/ledoff")
+@app.route("/ledoff.json")
 def ledoff():
-    led.ledoff()
-    return
+#    led.ledoff()
+    return json.dumps({"txt": "불을 껐습니다."})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
