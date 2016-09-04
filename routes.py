@@ -2,13 +2,16 @@
 
 import logging
 import requests
+import urllib
 import json
+import time
 from flask import Flask, redirect, url_for, render_template, request, Response
 from gtts_token import gtts_token
 import led
 
 app = Flask(__name__)
-domain = 'http://127.0.0.1:5000'
+#domain = 'http://127.0.1.1:5000'
+#domain = 'http://10.202.209.157:8000'
 
 
 # "/"으로 접속시 templates 디렉토리의 index.html을 노출
@@ -26,27 +29,33 @@ def getDaumMedia():
 
 
 # 구글 TTS 를 통한 음성 출력
-@app.route("/gtts")
+@app.route("/gtts.json")
 def gtts():
     text = request.args.get('text')
-    url = 'https://translate.google.com/translate_tts?q=' + text + '&tl=ko&client=t&tk='
+    #url = 'https://translate.google.com/translate_tts?q=' + text + '&tl=ko&client=t&tk='
+    url = 'https://translate.google.com/translate_tts'
     token = gtts_token.Token().calculate_token(text)    # 구글 TTS 를 사용하기 위한 token 생성
-    r = requests.get(url + token)
+    paramMap = {"q": text, "tl": "ko", "client": "t", "tk": token}
 
-    return render_template("gtts.html", url=url + token)
+    param = urllib.parse.urlencode(paramMap)
+    print(url + '?' + param)
+    r = requests.get(url + '?' + param)
+    resultObj = {"url": url + '?' + param}
+    return json.dumps(resultObj)
+    # return render_template("gtts.html", url=url + token)
 
 
 #  GPIO LED ON
-@app.route("/ledon")
+@app.route("/ledon.json")
 def ledon():
-    led.ledon()
-    return
+#    led.ledon()
+    return json.dumps({"txt": "불을 켰습니다."})
 
 # GPIO LED OFF
-@app.route("/ledoff")
+@app.route("/ledoff.json")
 def ledoff():
-    led.ledoff()
-    return
+#    led.ledoff()
+    return json.dumps({"txt": "불을 껐습니다."})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export FLASK_APP=routes.py
-flask run
+#export FLASK_APP=routes.py
+python3 routes.py
