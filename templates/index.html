@@ -8,54 +8,72 @@
 <body>
     <div><img src="/static/img/princess.jpg"></div>
     <div id="talk" name="talk"></div>
-    <iframe id="gtts" name="gtts" style="display: none; width:1px; height: 1px;" onerror="console.log('error iframe')"></iframe>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.4.0/annyang.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 <script>
 //https://www.talater.com/annyang/
 //https://github.com/TalAter/SpeechKITT
 //https://github.com/TalAter/annyang/blob/master/docs/README.md
-
 function call_tts(text) {
-
-    $.ajax({
-        url: "/gtts.json",
-        dataType: 'json',
-        data: {
-            "text": text
-        },
-        success: function(data) {
-            var iframe = document.getElementById("gtts");
-            iframe.src = data.url;
-        }
-    });
-
     $("#talk").text(text);
+    var parameters = {
+        onstart: startTTSCallback,
+        onend: voiceEndCallback
+    }
+    responsiveVoice.speak(text, "Korean Female", parameters);
 }
 
-function ledControl(status){
+function startTTSCallback() {
+    console.log("startTTS");
+    annyang.pause();
+}
+
+function voiceEndCallback() {
+    setInterval(function() {
+        annyang.resume();
+    }, 2000);
+    console.log("endTTS");
+}
+
+function ledControl(status) {
     var url;
-    if(status == true)
-    {
+    if (status == true) {
         url = "/ledon.json"
-    }else{
+    } else {
         url = "/ledoff.json"
     }
-
     $.ajax({
         url: url,
         dataType: 'json',
         data: {},
         success: function(data) {
-            if(data.txt){
+            if (data.txt) {
                 call_tts(data.txt);
             }
         }
     });
 }
 
-
+function getLotto() {
+    var lotto = new Array(6);
+    var count = 0;
+    var mFlag = true;
+    while (count < 6) {
+        var number;
+        number = parseInt(Math.random() * 45) + 1
+        for (var i = 0; i < count; i++)
+            if (lotto[i] == number) mFlag = false;
+        if (mFlag) {
+            lotto[count] = number;
+            count++;
+        }
+        mFlag = true;
+    }
+    // 추첨된 로또번호 출력
+    return (lotto[0] + '번 ' + lotto[1] + '번 ' + lotto[2] + '번 ' + lotto[3] + '번 ' + lotto[4] + '번 ' + lotto[5] + "번");
+}
 window.onload = function() {
     if (annyang) {
         var commandsDefault = {
@@ -66,26 +84,31 @@ window.onload = function() {
         var commands = {
             'smart mirror wake up :userName': function(userName) {
                 call_tts(userName + ' 일어났습니다.');
-            }
-            ,'smart mirror turn on': function() {
+            },
+            '야 불 켜': function() {
                 //call_tts("야 불 켜");
                 ledControl(true);
-            }
-            ,'smart mirror turn off': function() {
+            },
+            '야 불 꺼': function() {
                 //call_tts("야 불 꺼");
                 ledControl(false);
+            },
+            '야 돈 줘': function() {
+                call_tts("대박 나세요 " + getLotto());
             }
         };
-        annyang.setLanguage("en-US");
-        //annyang.setLanguage("ko");
+        //annyang.setLanguage("en-US");
+        annyang.setLanguage("ko");
         //annyang.addCommands(commandsDefault);
         annyang.addCommands(commands);
         annyang.debug(true);
         annyang.addCallback('resultNoMatch', function(userSaid) {
-              $("#talk").text(userSaid);
-              console.log("userSaid : " + userSaid); // sample output: 'hello'
+            $("#talk").text(userSaid);
+            console.log("userSaid : " + userSaid); // sample output: 'hello'
         });
-        annyang.start();
+        annyang.start({
+            paused: true
+        });
     }
 }
 </script>
