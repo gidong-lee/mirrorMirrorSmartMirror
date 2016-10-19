@@ -8,8 +8,9 @@
 <body>
     <div><img src="/static/img/princess.jpg"></div>
     <div id="talk" name="talk"></div>
-    <iframe id="gtts" name="gtts" style="display: none; width:1px; height: 1px;" onerror="console.log('error iframe')"></iframe>
-    현재 시간은 {{hangul_now}} 입니다.
+    <iframe id="youtubeDiv" name="youtubeDiv" onerror="console.log('error iframe')">
+
+    </iframe>
 </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
@@ -29,14 +30,28 @@ function call_tts(text) {
 
 function startTTSCallback() {
     console.log("startTTS");
-    annyang.pause();
+    //annyang.pause();
 }
 
 function voiceEndCallback() {
     setInterval(function() {
-        annyang.resume();
+        //annyang.resume();
     }, 2000);
     console.log("endTTS");
+}
+
+function showYouTube(title) {
+    var url = "youtube.json";
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        data: {'text' : title},
+        success: function(data) {
+            var items = data.items;
+            $("#youtubeDiv")[0].src = "http://www.youtube.com/embed/"+data.items[0]["id"].videoId+"?autoplay=1&origin=http://127.0.0.1";
+        }
+    });
 }
 
 function ledControl(status) {
@@ -76,6 +91,7 @@ function getLotto() {
     // 추첨된 로또번호 출력
     return (lotto[0] + '번 ' + lotto[1] + '번 ' + lotto[2] + '번 ' + lotto[3] + '번 ' + lotto[4] + '번 ' + lotto[5] + "번");
 }
+
 window.onload = function() {
     if (annyang) {
         var commandsDefault = {
@@ -84,8 +100,12 @@ window.onload = function() {
             }
         };
         var commands = {
-            'smart mirror wake up :userName': function(userName) {
+            '거울아 :userName 보여줘': function(userName) {
                 call_tts(userName + ' 일어났습니다.');
+            },
+            '거울아 :title 동영상 보여 줘': function(title) {
+                //call_tts(title + ' 동영상을 유부트에서 검색합니다.');
+                showYouTube(title);
             },
             '야 불 켜': function() {
                 //call_tts("야 불 켜");
@@ -109,7 +129,6 @@ window.onload = function() {
             console.log("userSaid : " + userSaid); // sample output: 'hello'
         });
         annyang.start({
-            paused: true
         });
     }
 }
