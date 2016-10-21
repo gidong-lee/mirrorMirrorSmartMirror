@@ -574,8 +574,8 @@ h1.navbar-brand {
 .service-icon {
     border: 3px solid transparent;
     display: inline-block;
-    height: 85px;
-    width: 85px;
+    height: 140px;
+    width: 140px;
     line-height: 101px;
 
     -webkit-transform: rotate(47deg);
@@ -608,6 +608,92 @@ h1.navbar-brand {
 .service-item h3 {
     font-size: 20px;
     text-transform: uppercase;
+}
+/* CUSTOM */
+.SKY_O01 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O01.png);
+}
+.SKY_O02 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O02.png);
+}
+.SKY_O03 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O03.png);
+}
+.SKY_O04 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O04.png);
+}
+.SKY_O05 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O05.png);
+}
+.SKY_O06 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O06.png);
+}
+.SKY_O07 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O07.png);
+}
+.SKY_O08 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O08.png);
+}
+.SKY_O09 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O09.png);
+}
+.SKY_O10 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O10.png);
+}
+.SKY_O11 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O11.png);
+}
+.SKY_O12 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O12.png);
+}
+.SKY_O13 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O13.png);
+}
+.SKY_O14 {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/SKY_O14.png);
+}
+.MAP {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/MAP.png);
+}
+.THERMOMETER {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/THERMOMETER.png);
+}
+.HUMIDITY {
+    width: 128px;
+    height: 128px;
+    background: url(../img/weather/HUMIDITY.png);
 }
 
 /*=================================================================

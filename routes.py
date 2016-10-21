@@ -16,6 +16,8 @@ config = configparser.ConfigParser()
 config.read("settings.cfg")
 
 # "/"으로 접속시 templates 디렉토리의 index.html을 노출
+
+
 @app.route("/")
 def hello():
     return render_template("index2.html")
@@ -46,13 +48,15 @@ def getWeatherInfo():
     latitude = request.args.get('latitude')
 
     headers = {'appKey': config["DEFAULT"]["SKPLANET_APP_KEY"]}
-    url = 'http://apis.skplanetx.com/weather/current/hourly?version=1&lat=' + (str(latitude))+ '&lon=' + (str(longitude))
-    
+    url = 'http://apis.skplanetx.com/weather/current/hourly?version=1&lat=' + \
+        (str(latitude)) + '&lon=' + (str(longitude))
 
     r = requests.get(url, headers=headers)
     return json.dumps(r.json()["weather"]["hourly"][0])
 
 #  GPIO LED ON
+
+
 @app.route("/ledon.json")
 def ledon():
     #    led.ledon()

@@ -34,7 +34,7 @@ function call_tts(text) {
         onstart: startTTSCallback,
         onend: voiceEndCallback
     }
-    //responsiveVoice.speak(text, "Korean Female", parameters);
+    responsiveVoice.speak(text, "Korean Female", parameters);
 }
 
 function startTTSCallback() {
@@ -183,8 +183,25 @@ function showTodayWeather(){
           success: function(weatherInfo) {
             var tts_text = weatherInfo.grid.city + ' ' + weatherInfo.grid.county + ' 날씨는 ' + weatherInfo.sky.name + '입니다';
             call_tts(tts_text);
-            $("#weatherEl").empty();
-            //$('#weatherTmpl').tmpl(youtubeList).appendTo("#weatherEl");
+
+            var weatherObj = {};
+            weatherObj.code = weatherInfo.sky.code;
+            weatherObj.name = weatherInfo.sky.name;
+            weatherObj.position = weatherInfo.grid.city + ' ' + weatherInfo.grid.county;
+            weatherObj.tc = weatherInfo.temperature.tc;
+            weatherObj.tmin = weatherInfo.temperature.tmin;
+            weatherObj.tmax = weatherInfo.temperature.tmax;
+            weatherObj.humidity = weatherInfo.humidity;
+            weatherObj.timeRelease = weatherInfo.timeRelease;
+
+            $("#weatherTimeSpan").parent().show();
+            $("#weatherTimeSpan").text(weatherObj.timeRelease);
+            $("#weatherPositionSpan").text(weatherObj.position);
+            $("#weatherSky").addClass(weatherObj.code);
+            $("#weatherSkySpan").text(weatherInfo.sky.name);
+            $("#weatherThermometerSpan").text("현재온도 : " + weatherObj.tc + "c");
+            $("#weatherHumidifySpan").text(weatherObj.humidity + "%");
+
             $("a[href='#WEATHER']").trigger("click");
 
 
@@ -226,11 +243,9 @@ window.onload = function() {
                 closeYoutube();
             },
             '거울아 만든 사람들 보여 줘': function(num) {
-                showMaker();
+                showMaker();            
             },
-            '거울아 오늘 날씨*': function() {
-                showTodayWeather();
-            },'거울아 날씨': function() {
+            '날씨': function() {
                 showTodayWeather();
             },
             '야 불 켜': function() {

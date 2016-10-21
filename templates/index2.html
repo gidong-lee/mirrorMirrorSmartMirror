@@ -190,42 +190,43 @@
                 <div class="row">
                     <div class="sec-title text-center">
                         <h2 class="wow animated bounceInLeft">날씨 정보</h2>
-                        <p class="wow animated bounceInRight">기준 시간 : </p>
+                        <p class="wow animated bounceInRight">거울아 오늘 날씨 </p>
+                        <p class="wow animated bounceInRight" style="display:none">기준 시간 : <span id="weatherTimeSpan">조회전</span></p>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn">
                         <div class="service-item">
                             <div class="service-icon">
-                                <i class="fa fa-home fa-3x"></i>
+                                <i class="fa MAP fa-3x"></i>
                             </div>
                             <h3>위치</h3>
-                            <p>${currentPosition}</p>
+                            <p><span id="weatherPositionSpan"></span></p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.3s">
                         <div class="service-item">
                             <div class="service-icon">
-                                <i class="fa fa-tasks fa-3x"></i>
+                                <i class="fa SKY_O01 fa-3x" id="weatherSky"></i>
                             </div>
                             <h3>기상상태</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            <p><span id="weatherSkySpan"></span></p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.6s">
                         <div class="service-item">
                             <div class="service-icon">
-                                <i class="fa fa-clock-o fa-3x"></i>
+                                <i class="fa THERMOMETER fa-3x"></i>
                             </div>
                             <h3>온도</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            <p><span id="weatherThermometerSpan"></span></p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.9s">
                         <div class="service-item">
                             <div class="service-icon">
-                                <i class="fa fa-heart fa-3x"></i>
+                                <i class="fa HUMIDITY fa-3x"></i>
                             </div>
-                            <h3>Web Security</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            <h3>습도</h3>
+                            <p><span id="weatherHumidifySpan"></span></p>
                         </div>
                     </div>
                 </div>
