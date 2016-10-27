@@ -239,13 +239,13 @@ window.onload = function() {
             ':num번째 동영상 실행': function(num) {
                 showYouTubeNum(num);
             },
-            '동영상 종료': function(num) {
+            '동영상 종료': function() {
                 closeYoutube();
             },
-            '거울아 만든 사람들 보여 줘': function(num) {
+            '거울아 만든 사람들 보여 줘': function() {
                 showMaker();            
             },
-            '날씨': function() {
+            '거울아 날씨': function() {
                 showTodayWeather();
             },
             '야 불 켜': function() {
@@ -256,7 +256,7 @@ window.onload = function() {
                 //call_tts("야 불 꺼");
                 ledControl(false);
             },
-            '거울아 로또 번호 좀': function() {
+            '로또': function() {
                 showLotto();
             }
         };
