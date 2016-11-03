@@ -8,21 +8,21 @@ jQuery(window).load(function() {});
 $(function() {});
 $(document).ready(function() {
     var userList = [{
-        'username': "이기동"
+        'value': "이기동"
     }, {
-        'username': "김현정"
+        'value': "김현정"
     }, {
-        'username': "이지원"
+        'value': "이지원"
     }, {
-        'username': "김주영"
+        'value': "김주영"
     }, {
-        'username': "김나래"
+        'value': "김나래"
     }, {
-        'username': "박동조"
+        'value': "박동조"
     }, {
-        'username': "박성욱"
+        'value': "박성욱"
     }, {
-        'username': "양중근"
+        'value': "양중근"
     }];
     $('#userTmpl').tmpl(userList).appendTo("#userListEl");
 });
@@ -160,7 +160,19 @@ function showLotto() {
         mFlag = true;
     }
     // 추첨된 로또번호 출력
-    call_tts('대박나세요 ' + lotto[0] + ' ' + lotto[1] + ' ' + lotto[2] + ' ' + lotto[3] + ' ' + lotto[4] + ' ' + lotto[5] + "번");
+
+    var numList = [];
+
+    for (var mIdx = 0; mIdx < lotto.length; mIdx++) {
+        numList.push({"value":lotto[mIdx]});
+    }
+    $("#lottoListEl").empty();
+    $('#userTmpl').tmpl(numList).appendTo("#lottoListEl");
+    $("a[href='#LOTTO']").trigger("click");
+    call_tts('로또 사서 대박나세요');
+
+
+
 }
 
 function showTodayWeather(){
@@ -248,16 +260,15 @@ window.onload = function() {
             '거울아 날씨': function() {
                 showTodayWeather();
             },
-            '야 불 켜': function() {
+            '거울아 돈벌기': function() {
+                showLotto();
+            },'야 불 켜': function() {
                 //call_tts("야 불 켜");
                 ledControl(true);
             },
             '야 불 꺼': function() {
                 //call_tts("야 불 꺼");
                 ledControl(false);
-            },
-            '로또': function() {
-                showLotto();
             }
         };
         //annyang.setLanguage("en-US");

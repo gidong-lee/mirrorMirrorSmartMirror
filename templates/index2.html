@@ -73,11 +73,11 @@
             <nav class="collapse navbar-collapse navbar-right" role="navigation">
                 <ul id="nav" class="nav navbar-nav">
                     <li><a href="#DASHBOARD">대시보드</a></li>
-                    <li><a href="#WEATHER">날씨</a></li>
+                    <li><a href="#WEATHER" onmousedown="showTodayWeather();">날씨</a></li>
                     <li><a href="#YOUTUBE">유투브</a></li>
-                    <li><a href="#LOTTO">로또번호</a></li>
-                    <li><a href="#price">price</a></li>
-                    <li><a href="#MAKER">만든사람들</a></li>
+                    <li><a href="#LOTTO" onmousedown="showLotto();">돈벌기</a></li>
+                    <!--<li><a href="#price">price</a></li>-->
+                    <li><a href="#MAKER" onmousedown="showMaker();">만든사람들</a></li>
                 </ul>
             </nav>
             <!-- /main nav -->
@@ -97,19 +97,22 @@
                         <div class="bg-img bg-img-1"></div>
                         <div class="slide-caption">
                             <div class="caption-content">
-                                <h2 class="animated fadeInDown">BLUE Onepage HTML5 Template</h2>
-                                <span class="animated fadeInDown">Clean and Professional one page Template</span>
-                                <a href="#" class="btn btn-blue btn-effect">Join US</a>
+                                <h2 class="animated fadeInDown">Mirror Mirror Smart Mirror</h2>
+                                <span class="animated fadeInDown">가능 명령어</span>
+                                <span class="animated fadeInDown">거울아 (제목) 동영상 검색</span>
+                                <span class="animated fadeInDown">거울아 만든 사람들 보여줘</span>
+                                <span class="animated fadeInDown">거울아 날씨</span>
+                                <span class="animated fadeInDown">거울아 로또</span>
                             </div>
                         </div>
                     </div>
+                    <!--
                     <div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
                         <div class="bg-img bg-img-2"></div>
                         <div class="slide-caption">
                             <div class="caption-content">
                                 <h2>BLUE Onepage HTML5 Template</h2>
                                 <span>Clean and Professional one page Template</span>
-                                <a href="#" class="btn btn-blue btn-effect">Join US</a>
                             </div>
                         </div>
                     </div>
@@ -124,13 +127,14 @@
                         </div>
                     </div>
                 </div>
+                -->
                 <!-- /sl-slider -->
                 <!-- 
                 <nav id="nav-arrows" class="nav-arrows">
                     <span class="nav-arrow-prev">Previous</span>
                     <span class="nav-arrow-next">Next</span>
                 </nav>
-                -->
+                
                 <nav id="nav-arrows" class="nav-arrows hidden-xs hidden-sm visible-md visible-lg">
                     <a href="javascript:;" class="sl-prev">
                         <i class="fa fa-angle-left fa-3x"></i>
@@ -144,6 +148,7 @@
                     <span></span>
                     <span></span>
                 </nav>
+                -->
             </div>
             <!-- /slider-wrapper -->
         </section>
@@ -242,7 +247,6 @@
                         <p>거울아 (제목) 동영상 검색</p>
                         <p>?번째 동영상 재생</p>
                         <p>동영상 종료</p>
-
                     </div>
                     <script id="youtubeTmpl" type="text/x-jquery-tmpl">
                         <li class="portfolio-item" data-videoId="${videoId}">
@@ -265,29 +269,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="sec-title text-center white wow animated fadeInDown">
-                            <h2>무언가</h2>
+                            <h2>로또 번호 생성</h2>
                         </div>
                         <div id="testimonial" class=" wow animated fadeInUp">
                             <div class="testimonial-item text-center">
-                                <img src="/static/img/member-1.jpg" alt="Our Clients">
-                                <div class="clearfix">
-                                    <span>Katty Flower</span>
+                            <ul class="social-button" id="lottoListEl">
+                            </ul>
+                                <!--<div class="clearfix">
+                                    <span>대박 나세용!!</span>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                </div>
-                            </div>
-                            <div class="testimonial-item text-center">
-                                <img src="/static/img/member-1.jpg" alt="Our Clients">
-                                <div class="clearfix">
-                                    <span>Katty Flower</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                </div>
-                            </div>
-                            <div class="testimonial-item text-center">
-                                <img src="/static/img/member-1.jpg" alt="Our Clients">
-                                <div class="clearfix">
-                                    <span>Katty Flower</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -296,6 +287,7 @@
         </section>
         <!-- end Testimonial section -->
         <!-- Price section -->
+        <!--
         <section id="price">
             <div class="container">
                 <div class="row">
@@ -360,6 +352,7 @@
                 </div>
             </div>
         </section>
+        -->
         <!-- end Price section -->
         <!-- Social section -->
         <section id="MAKER" class="parallax social">
@@ -373,7 +366,7 @@
                         <script id="userTmpl" type="text/x-jquery-tmpl">
                             <li class='wow animated zoomIn' style='margin-left: 0px;margin-right: 0px;'>
                                 <a href='#'>
-                                    <i class='fa fa-2x'>${username}</i>
+                                    <i class='fa fa-2x'>${value}</i>
                                 </a>
                             </li>
                         </script>
@@ -385,7 +378,7 @@
         </section>
         <!-- end Social section -->
         <!-- Contact section -->
-        <section id="contact">
+        <!--<section id="contact">
             <div class="container">
                 <div class="row">
                     <div class="sec-title text-center wow animated fadeInDown">
@@ -421,15 +414,19 @@
                 </div>
             </div>
         </section>
+        -->
         <!-- end Contact section -->
+        <!--
         <section id="google-map">
             <div id="map-canvas" class="wow animated fadeInUp"></div>
         </section>
+        -->
     </main>
     <footer id="footer">
         <div class="container">
             <div class="row text-center">
                 <div class="footer-content">
+                    <!--
                     <div class="wow animated fadeInDown">
                         <p>newsletter signup</p>
                         <p>Get Cool Stuff! We hate spam!</p>
@@ -451,7 +448,8 @@
                             <li class="wow animated zoomIn" data-wow-delay="1.2s"><a href="#"><i class="fa fa-youtube fa-3x"></i></a></li>
                         </ul>
                     </div>
-                    <p>Copyright &copy; 2014-2015 Design and Developed By<a href="http://www.themefisher.com">Themefisher</a> </p>
+                    -->
+                    <p>Copyright &copy; 2016-2016 MirrorMirrorSmartMirror Plalab</p>
                 </div>
             </div>
         </div>
